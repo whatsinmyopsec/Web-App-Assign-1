@@ -35,7 +35,7 @@ router.findOne = (req, res) => {
 
     Lobbies.find({ "_id" : req.params.id },function(err, lobby) {
         if (err)
-            res.json({ message: 'Donation NOT Found!', errmsg : err } );
+            res.json({ message: 'Lobby NOT Found!', errmsg : err } );
         else
             res.send(JSON.stringify(lobby,null,5));
     });
@@ -74,9 +74,9 @@ router.addLobby = (req, res) => {
 
     lobby.save(function(err) {
         if (err)
-            res.json({ message: 'Donation NOT Added!', errmsg : err } );
+            res.json({ message: 'Lobby NOT Added!', errmsg : err } );
         else
-            res.json({ message: 'Donation Successfully Added!', data: lobby });
+            res.json({ message: 'Lobby Successfully Added!', data: lobby });
     });
 }
 
