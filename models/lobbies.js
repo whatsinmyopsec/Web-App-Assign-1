@@ -1,7 +1,9 @@
-const lobbies = [
-    {id: 1, gametype: 'pvplayer', upvotes: 1},
-    {id: 2, gametype: 'pvbot', upvotes: 2},
-    {id: 3, gametype: 'pvplayer', upvotes: 1}
-];
+let mongoose = require('mongoose');
 
-module.exports = lobbies;
+let LobbySchema = new mongoose.Schema({
+        gametype: String,
+        upvotes: {type: Number, default: 0}
+    },
+    { collection: 'lobbiesdb' });
+
+module.exports = mongoose.model('Lobby', LobbySchema);

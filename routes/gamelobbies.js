@@ -1,12 +1,31 @@
-let lobbies = require('../models/lobbies');
+let Lobbies = require('../models/lobbies');
 let express = require('express');
 let router = express.Router();
 
+let mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:27017/lobbiesdb');
+
+let db = mongoose.connection;
+
+db.on('error', function (err) {
+    console.log('Unable to Connect to [ ' + db.name + ' ]', err);
+});
+
+db.once('open', function () {
+    console.log('Successfully Connected to [ ' + db.name + ' ]');
+});
 
 router.findAll = (req, res) => {
     // Return a JSON representation of our list
     res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(lobbies, null, 5));
+
+    Lobbies.find(function(err, lobbies) {
+        if (err)
+            res.send(err);
+
+        res.send(JSON.stringify(lobbies,null,5));
+    });
 }
 
 router.findOne = (req, res) => {
