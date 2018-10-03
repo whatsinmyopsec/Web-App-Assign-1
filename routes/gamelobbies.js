@@ -28,17 +28,17 @@ router.findAll = (req, res) => {
     });
 }
 
+
 router.findOne = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
 
-    var lobby = getByValue(lobbies, req.params.id);
-
-    if (lobby != null)
-        res.send(JSON.stringify(lobby, null, 5));
-    else
-        res.send('Lobby NOT Found!!');
-
+    Lobbies.find({ "_id" : req.params.id },function(err, lobby) {
+        if (err)
+            res.json({ message: 'Donation NOT Found!', errmsg : err } );
+        else
+            res.send(JSON.stringify(lobby,null,5));
+    });
 }
 
 function getByValue(array, id) {
@@ -50,29 +50,34 @@ function getByValue(array, id) {
 
 function getTotalVotes(array) {
     let totalVotes = 0;
-    array.forEach(function (obj) {
-        totalVotes += obj.upvotes;
-    });
+    array.forEach(function(obj) { totalVotes += obj.upvotes; });
     return totalVotes;
 }
 
 router.findTotalVotes = (req, res) => {
 
-    let votes = getTotalVotes(lobbies);
-    res.json({totalvotes: votes});
+    Lobbies.find(function(err, lobbies) {
+        if (err)
+            res.send(err);
+        else
+            res.json({ totalvotes : getTotalVotes(lobbies) });
+    });
 }
 
 router.addLobby = (req, res) => {
-    //Add a new lobby to our list
-    var id = Math.floor((Math.random() * 1000000) + 1); //Randomly generate an id
-    var currentSize = lobbies.length;
 
-    lobbies.push({"id": id, "paymenttype": req.body.paymenttype, "upvotes": 0});
+    res.setHeader('Content-Type', 'application/json');
 
-    if ((currentSize + 1) === lobbies.length)
-        res.json({message: 'New Lobby Added Successfully!'});
-    else
-        res.json({message: 'Lobby NOT Added!'});
+    var lobby = new Lobby();
+
+    lobby.gametype = req.body.gametype;
+
+    lobby.save(function(err) {
+        if (err)
+            res.json({ message: 'Donation NOT Added!', errmsg : err } );
+        else
+            res.json({ message: 'Donation Successfully Added!', data: lobby });
+    });
 }
 
 router.incrementUpvotes = (req, res) => {
@@ -88,17 +93,13 @@ router.incrementUpvotes = (req, res) => {
 }
 
 router.deleteLobby = (req, res) => {
-    //Delete the selected donation based on its id
-    var lobby = getByValue(lobbies,req.params.id);
-    var index = lobbies.indexOf(lobby);
 
-    var currentSize = lobbies.length;
-    lobbies.splice(index, 1);
-
-    if((currentSize - 1) === lobbies.length)
-        res.json({ message: 'Lobby Deleted!'});
-    else
-        res.json({ message: 'Lobby NOT Deleted!'});
+    Lobbies.findByIdAndRemove(req.params.id, function(err) {
+        if (err)
+            res.json({ message: 'Lobby NOT DELETED!', errmsg : err } );
+        else
+            res.json({ message: 'Lobby Successfully Deleted!'});
+    });
 }
 
 module.exports = router;
