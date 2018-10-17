@@ -1,30 +1,18 @@
-let lobbies = require('../models/lobbies');
+let player = require('../models/player');
 let express = require('express');
 let router = express.Router();
 
-let mongoose = require('mongoose');
-
-mongoose.connect('mongodb://localhost:27017/lobbiesdb');
-
-let db = mongoose.connection;
-
-db.on('error', function (err) {
-    console.log('Unable to Connect to [ ' + db.name + ' ]', err);
-});
-
-db.once('open', function () {
-    console.log('Successfully Connected to [ ' + db.name + ' ]');
-});
+//players fix needed
 
 router.findAll = (req, res) => {
     // Return a JSON representation of our list
     res.setHeader('Content-Type', 'application/json');
 
-    lobbies.find(function(err, lobbies) {
+    player.find(function(err, players) {
         if (err)
             res.send(err);
 
-        res.send(JSON.stringify(lobbies,null,5));
+        res.send(JSON.stringify(players,null,5));
     });
 }
 
@@ -33,11 +21,11 @@ router.findOne = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
 
-    lobbies.find({ "_id" : req.params.id },function(err, lobby) {
+    player.find({ "_id" : req.params.id },function(err, players) {
         if (err)
             res.json({ message: 'Lobby NOT Found!', errmsg : err } );
         else
-            res.send(JSON.stringify(lobby,null,5));
+            res.send(JSON.stringify(players,null,5));
     });
 }
 
@@ -48,9 +36,9 @@ function getByValue(array, id) {
     return result ? result[0] : null; // or undefined
 }
 
-function getTotalVotes(array) {
+function getTotalLife(array) {
     let totalVotes = 0;
-    array.forEach(function(obj) { totalVotes += obj.upvotes; });
+    array.forEach(function(obj) { totalVotes -= obj.lives; });
     return totalVotes;
 }
 

@@ -7,7 +7,8 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
-const lobbies = require('./routes/gamelobbies')
+const lobbies = require('./routes/gamelobbies');
+const deck = require('./routes/deck');
 
 const app = express();
 
@@ -28,6 +29,9 @@ app.use('/users', usersRouter);
 app.get('/lobbies', lobbies.findAll);
 app.get('/lobbies/votes', lobbies.findTotalVotes);
 app.get('/lobbies/:id', lobbies.findOne);
+app.get('/cards', deck.findAll);
+app.get('/cards/:id', deck.findOne);
+
 
 app.post('/lobbies', lobbies.addLobby);
 
