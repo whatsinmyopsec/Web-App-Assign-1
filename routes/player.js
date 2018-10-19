@@ -1,5 +1,6 @@
 let player = require('../models/player');
 let express = require('express');
+let card = require('../models/cards');
 let router = express.Router();
 
 //players fix needed
@@ -70,11 +71,18 @@ router.addPlayer = (req, res) => {
     });
 }
 
+//ADD THIS FUNCTION
+function damagetaken(card) {
+    let totalLives = 0;
+    card.forEach(function(obj) { totalLives -= obj.Lives; });
+    return integer;
+}
+
 router.decrementLives = (req, res) => {
     var player = getByValue(player,req.params.id);
 
     if (player != null) {
-        player.lives -= dammagetaken(card);
+        player.lives -= dammagetaken(card.damage);
         res.json({status : 200, message : 'Damage dealt Successful' , player : player });
     }
     else
