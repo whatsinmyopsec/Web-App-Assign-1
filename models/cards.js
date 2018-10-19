@@ -22,7 +22,6 @@ const cards = [
     {id: 18, name: "Hecate", type: "melee", ability: "", damage: 60},
     {id: 19, name: "Tyche", type: "ranged", ability: "", damage: 75},
 
-
 ];
 
 module.exports = cards;

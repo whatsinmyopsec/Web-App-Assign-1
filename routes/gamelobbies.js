@@ -68,7 +68,7 @@ router.addLobby = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
 
-    var lobby = new Lobby();
+    var lobby = new lobbies();
 
     lobby.gametype = req.body.gametype;
     lobby.lobbynumber = req.body.lobbynumber;

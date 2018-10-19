@@ -3,12 +3,14 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const io = require('socket.io');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const lobbies = require('./routes/gamelobbies');
 const deck = require('./routes/deck');
+const players = require('./routes/player');
 
 const app = express();
 
@@ -29,15 +31,28 @@ app.use('/users', usersRouter);
 app.get('/lobbies', lobbies.findAll);
 app.get('/lobbies/votes', lobbies.findTotalVotes);
 app.get('/lobbies/:id', lobbies.findOne);
+
 app.get('/cards', deck.findAll);
 app.get('/cards/:id', deck.findOne);
+
+app.get('/player', players.findAll);
+app.get('/player/lives', players.findTotalLives);
+app.get('/players/:id', players.findOne);
 
 
 app.post('/lobbies', lobbies.addLobby);
 
+app.post('/players', players.addPlayer);
+
+
 app.put('/lobbies/:id/vote', lobbies.incrementUpvotes);
 
+app.put('/players/:id/lives', players.decrementLives);
+
+
 app.delete('/lobbies/:id', lobbies.deleteLobby);
+
+app.delete('/players/:id', players.deletePlayer);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

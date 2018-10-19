@@ -23,7 +23,7 @@ router.findOne = (req, res) => {
 
     player.find({ "_id" : req.params.id },function(err, players) {
         if (err)
-            res.json({ message: 'Lobby NOT Found!', errmsg : err } );
+            res.json({ message: 'Player NOT Found!', errmsg : err } );
         else
             res.send(JSON.stringify(players,null,5));
     });
@@ -36,58 +36,59 @@ function getByValue(array, id) {
     return result ? result[0] : null; // or undefined
 }
 
-function getTotalLife(array) {
-    let totalVotes = 0;
-    array.forEach(function(obj) { totalVotes -= obj.lives; });
-    return totalVotes;
+function getTotalLives(array) {
+    let totalLives = 0;
+    array.forEach(function(obj) { totalLives -= obj.Lives; });
+    return totalLives;
 }
 
-router.findTotalVotes = (req, res) => {
+router.findTotalLives = (req, res) => {
 
-    lobbies.find(function(err, lobbies) {
+    player.find(function(err, players) {
         if (err)
             res.send(err);
         else
-            res.json({ totalvotes : getTotalVotes(lobbies) });
+            res.json({ totalLives : getTotalLives(players) });
     });
 }
 
-router.addLobby = (req, res) => {
+router.addPlayer = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
 
-    var lobby = new Lobby();
+    var Player = new player();
 
-    lobby.gametype = req.body.gametype;
-    lobby.lobbynumber = req.body.lobbynumber;
+    Player.name = req.body.name;
+    Player.email = req.body.email;
+    Player.password = req.body.password;
 
-    lobby.save(function(err) {
+    Player.save(function(err) {
         if (err)
-            res.json({ message: 'Lobby NOT Added!', errmsg : err } );
+            res.json({ message: 'Player NOT Added!', errmsg : err } );
         else
-            res.json({ message: 'Lobby Successfully Added!', data: lobby });
+            res.json({ message: 'Player Successfully Added!', data: Player });
     });
 }
 
-router.incrementUpvotes = (req, res) => {
-    var lobby = getByValue(lobbies,req.params.id);
+router.decrementLives = (req, res) => {
+    var player = getByValue(player,req.params.id);
 
-    if (lobby != null) {
-        lobby.upvotes += 1;
-        res.json({status : 200, message : 'UpVote Successful' , lobby : lobby });
+    if (player != null) {
+        player.lives -= dammagetaken(card);
+        res.json({status : 200, message : 'Damage dealt Successful' , player : player });
     }
     else
-        res.send('Lobby NOT Found - UpVote NOT Successful!!');
+        res.send('Player NOT Found - Damage NOT Successful!!');
 
 }
 
-router.deleteLobby = (req, res) => {
+router.deletePlayer = (req, res) => {
 
-    lobbies.findByIdAndRemove(req.params.id, function(err) {
+    player.findByIdAndRemove(req.params.id, function(err) {
         if (err)
-            res.json({ message: 'Lobby NOT DELETED!', errmsg : err } );
+            res.json({ message: 'Player NOT DELETED!', errmsg : err } );
         else
-            res.json({ message: 'Lobby Successfully Deleted!'});
+            res.json({ message: 'Player Successfully Deleted!'});
     });
 }
 

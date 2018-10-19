@@ -2,7 +2,7 @@ let card = require('../models/cards');
 let random = require('./randomize');
 let express = require('express');
 let router = express.Router();
-const decksize = card.length;
+const deckSize = card.length;
 
 router.findAll = (req, res) => {
     // Return a JSON representation of our list
@@ -19,7 +19,7 @@ router.findOne = (req, res) => {
     if (deck != null)
         res.send(JSON.stringify(deck,null,5));
     else
-        res.send('Donation NOT Found!!');
+        res.send('Card NOT Found!!');
 
 }
 
@@ -40,7 +40,7 @@ router.shuffle = function() {
     let rIndex = 0;
     let holdingRef = null;
 
-    for (let sRef = decksize - 1; sRef > 0; sRef--) {
+    for (let sRef = deckSize - 1; sRef > 0; sRef--) {
         rIndex = random.getRandomNumber(0, sRef);
         holdingRef = this.card[sRef - 1];
         this.card[sRef - 1] = this.card[rIndex];
