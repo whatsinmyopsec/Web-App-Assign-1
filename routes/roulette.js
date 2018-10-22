@@ -8,6 +8,8 @@ router.randomOutcome = (req,res) => {
 
 }
 
+//NEEDS TO BE SOME KIND OF TIMEOUT ON THIS
+//AD FOR USE ..ETC
 
 
 
