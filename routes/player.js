@@ -74,8 +74,8 @@ router.addPlayer = (req, res) => {
 //ADD THIS FUNCTION
 function damagetaken(card) {
     let totalLives = 0;
-    card.forEach(function(obj) { totalLives -= obj.Lives; });
-    return integer;
+    card.forEach(function(obj) { livesLeft -= obj.Lives; });
+    return livesLeft;
 }
 
 router.decrementLives = (req, res) => {
