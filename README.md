@@ -8,6 +8,7 @@ Web-app-development assignment 1
 
 - [models](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#models)
 - [routes](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#routes)
+- [set-up](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#set-up)
 
 models
 ---------
@@ -15,6 +16,10 @@ models
 - [ ] **Lobbies** - Simple schema for lobby layout.
 - [ ] **Player** - Basic mongoose schema to get base information on the player/user. with an array of starting cards. Also not sure if this will be how I want it too.
 - [ ] **Roulette Options** - Again a schema for the data, this time for cards to only be unlocked via roulette.
+
+
+
+
 
 routes
 ---------
@@ -25,4 +30,12 @@ routes
 - [ ] **Player** - Used for showing all players and will be used for a leader-board in the future.
 - [ ] **Randomize** - Just a function used but the deck route.
 - [ ] **Roulette** - This will be the roulette.
+
+
+
+
+
+set-up
+--------
+
 
