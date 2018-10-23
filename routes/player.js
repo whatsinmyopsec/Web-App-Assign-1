@@ -17,7 +17,6 @@ router.findAll = (req, res) => {
     });
 }
 
-
 router.findOne = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
