@@ -3,7 +3,7 @@ let mongoose = require('mongoose');
 let LobbySchema = new mongoose.Schema({
         gametype: String,
         upvotes: {type: Number, default: 0},
-        lobbynumber: Number
+        lobbynumber: {type: Number, unique: true}
     },
     { collection: 'lobbiesdb' });
 

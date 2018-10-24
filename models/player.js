@@ -5,6 +5,7 @@ let PlayerSchema = new mongoose.Schema({
         email: {type: String, unique: true},
         password: {type:String},
         lives: {type: Number, default: 400},
+    //should there be a foreign key for this?
         cards:[
             {
                 id: Number,

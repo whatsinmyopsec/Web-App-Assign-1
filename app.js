@@ -33,7 +33,7 @@ app.get('/lobbies/votes', lobbies.findTotalVotes);
 app.get('/lobbies/:id', lobbies.findOne);
 
 app.get('/cards', deck.findAll);
-app.get('/cards/:id', deck.findOne);
+app.get('/onecard/:id', deck.findOne);
 
 app.get('/player', players.findAll);
 app.get('/player/lives', players.findTotalLives);

@@ -14,17 +14,17 @@ router.findOne = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
 
-    const deck = getByValue(card,req.params.id);
+    var deck = getByValue(card,req.params.id);
 
     if (deck != null)
         res.send(JSON.stringify(deck,null,5));
     else
-        res.send('Card NOT Found!!');
+        res.send('deckCard NOT Found!!');
 
 }
 
 function getByValue(array, id) {
-    const result  = array.filter(function(obj){return obj.id === id;} );
+    var result  = array.filter(function(obj){return obj.id === id;} );
     return result ? result[0] : null; // or undefined
 }
 

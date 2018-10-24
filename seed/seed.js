@@ -1,10 +1,9 @@
-/*
-import * as res from "express";
+const seeder = require('mongoose-seed');
+var logger = require('winston');
 
-var seeder = require('mongoose-seed');
 
-var seed = function(req,res) {
-    seeder.connect('mongodb://localhost/lobbiesdb', function() {
+const seed = function (cb) {
+    seeder.connect('mongodb://localhost:27017/lobbiesdb', function () {
 
         // Load the player model
         seeder.loadModels([
@@ -12,24 +11,24 @@ var seed = function(req,res) {
 
         ]);
         // Drop existing Player documents
-        seeder.clearModels(['player'], function() {
+        seeder.clearModels(['player'], function () {
 
             // Populate from data.json
-            seeder.populateModels(require('./data.json'), function(err) {
+            seeder.populateModels(require('./data.json'), function (err) {
                 if (err) {
-                    res.json({ message: 'Error seeding', errmsg : err } );
+                    logger.error('Error seeding', err);
                     if (require.main === module) {
                         return process.exit(1);
                     } else {
-                        return res(err);
+                        return cb(err);
                     }
                 }
 
-                res.json({ message: 'Seeding finished', errmsg : err } );
+                logger.log('Seeding done.');
                 if (require.main === module) {
                     process.exit(0);
                 } else {
-                    return res();
+                    return cb();
                 }
             });
 
@@ -39,15 +38,17 @@ var seed = function(req,res) {
 
 if (require.main === module) {
     seed(function() {
-        res.json({ message: 'Seeding complete, exiting', errmsg : err } );
+        logger.log('Seeding complete, exiting.');
     });
 }
 
-module.exports = seed;*/
+module.exports = seed;
 
+/*
 'use strict';
-
 import Player from '../models/player';
+
+
 
 Player.find({}).removeAsync()
     .then(() => {
@@ -123,4 +124,4 @@ Player.find({}).removeAsync()
             }
         )
     }
-    );
+    );*/
