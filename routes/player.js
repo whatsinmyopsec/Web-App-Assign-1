@@ -18,17 +18,29 @@ router.findAll = (req, res) => {
     });
 }
 
-router.findOne = (req, res) => {
-
+router.getPLayersCount = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
-    player.find({"_id": req.params.id}, function (err, players) {
+    player.find().count(function (err, players) {
         if (err)
-            res.json({message: 'Player NOT Found!', errmsg: err});
-        else
-            res.send(JSON.stringify(players, null, 5));
+            res.send(err);
+
+        res.send(JSON.stringify(players, null, 5));
     });
+
 }
+
+    router.findOne = (req, res) => {
+
+        res.setHeader('Content-Type', 'application/json');
+
+        player.find({"_id": req.params.id}, function (err, players) {
+            if (err)
+                res.json({message: 'Player NOT Found!', errmsg: err});
+            else
+                res.send(JSON.stringify(players, null, 5));
+        });
+    }
 
 function getByValue(array, id) {
     var result = array.filter(function (obj) {
@@ -59,10 +71,8 @@ router.addPlayer = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
 
-    let id = Math.floor((Math.random() * 100000) + 1);
     var Player = new player();
 
-    Player.id = id;
     Player.name = req.body.name;
     Player.email = req.body.email;
     Player.password = req.body.password;
@@ -78,7 +88,7 @@ router.addPlayer = (req, res) => {
 function getCardByValue(array, damage) {
     for (const obj of array) {
         if (obj.damage === damage)
-            //obj.parseInt(damage);
+        //obj.parseInt(damage);
             return obj;
     }
     return null;

@@ -8,7 +8,7 @@ let gamelobby = require('./gamelobbies');
 
 router.startgame(function () {
 
-    //SOME TRIGGER TO START A GAME
+
 
 })
 
