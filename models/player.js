@@ -1,6 +1,7 @@
 let mongoose = require('mongoose');
 
 let PlayerSchema = new mongoose.Schema({
+        id:Number,
         name:String,
         email: {type: String, unique: true},
         password: {type:String},

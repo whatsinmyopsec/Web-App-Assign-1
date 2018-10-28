@@ -1,5 +1,6 @@
 let player = require('../models/player');
 let express = require('express');
+let deck = require('./deck');
 let card = require('../models/cards');
 let router = express.Router();
 
@@ -9,11 +10,11 @@ router.findAll = (req, res) => {
     // Return a JSON representation of our list
     res.setHeader('Content-Type', 'application/json');
 
-    player.find(function(err, players) {
+    player.find(function (err, players) {
         if (err)
             res.send(err);
 
-        res.send(JSON.stringify(players,null,5));
+        res.send(JSON.stringify(players, null, 5));
     });
 }
 
@@ -21,11 +22,11 @@ router.findOne = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
 
-    player.find({ "_id" : req.params.id },function(err, players) {
+    player.find({"_id": req.params.id}, function (err, players) {
         if (err)
-            res.json({ message: 'Player NOT Found!', errmsg : err } );
+            res.json({message: 'Player NOT Found!', errmsg: err});
         else
-            res.send(JSON.stringify(players,null,5));
+            res.send(JSON.stringify(players, null, 5));
     });
 }
 
@@ -38,17 +39,19 @@ function getByValue(array, id) {
 
 function getTotalLives(array) {
     let totalLives = 0;
-    array.forEach(function(obj) { totalLives -= obj.Lives; });
+    array.forEach(function (obj) {
+        totalLives += obj.lives;
+    });
     return totalLives;
 }
 
 router.findTotalLives = (req, res) => {
 
-    player.find(function(err, players) {
+    player.find(function (err, players) {
         if (err)
             res.send(err);
         else
-            res.json({ totalLives : getTotalLives(players) });
+            res.json({totalLives: getTotalLives(players)});
     });
 }
 
@@ -56,33 +59,49 @@ router.addPlayer = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
 
+    let id = Math.floor((Math.random() * 100000) + 1);
     var Player = new player();
 
+    Player.id = id;
     Player.name = req.body.name;
     Player.email = req.body.email;
     Player.password = req.body.password;
 
-    Player.save(function(err) {
+    Player.save(function (err) {
         if (err)
-            res.json({ message: 'Player NOT Added!', errmsg : err } );
+            res.json({message: 'Player NOT Added!', errmsg: err});
         else
-            res.json({ message: 'Player Successfully Added!', data: Player });
+            res.json({message: 'Player Successfully Added!', data: Player});
     });
 }
 
-//ADD THIS FUNCTION
-function damagetaken(card) {
-    let totalLives = 0;
-    card.forEach(function(obj) { livesLeft -= obj.Lives; });
-    return livesLeft;
+function getCardByValue(array, damage) {
+    for (const obj of array) {
+        if (obj.damage === damage)
+            //obj.parseInt(damage);
+            return obj;
+    }
+    return null;
 }
 
+/*//ADD THIS FUNCTION
+function damagetaken(card) {
+    var damage = getCardByValue(card, req.params.damage);
+
+
+
+    card.forEach(function(obj) { livesLeft -= obj.Lives; });
+    return livesLeft;
+}*/
+
 router.decrementLives = (req, res) => {
-    var player = getByValue(player,req.params.id);
+    var player = getByValue(player, req.params.id);
+    var card = getCardByValue(card, req.params.damage);
+    var damage = obj.parseInt(card);
 
     if (player != null) {
-        player.lives -= dammagetaken(card.damage);
-        res.json({status : 200, message : 'Damage dealt Successful' , player : player });
+        player.lives -= damage;
+        res.json({status: 200, message: 'Damage dealt Successful', player: player});
     }
     else
         res.send('Player NOT Found - Damage NOT Successful!!');
@@ -91,11 +110,11 @@ router.decrementLives = (req, res) => {
 
 router.deletePlayer = (req, res) => {
 
-    player.findByIdAndRemove(req.params.id, function(err) {
+    player.findByIdAndRemove(req.params.id, function (err) {
         if (err)
-            res.json({ message: 'Player NOT DELETED!', errmsg : err } );
+            res.json({message: 'Player NOT DELETED!', errmsg: err});
         else
-            res.json({ message: 'Player Successfully Deleted!'});
+            res.json({message: 'Player Successfully Deleted!'});
     });
 }
 

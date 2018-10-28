@@ -24,8 +24,11 @@ router.findOne = (req, res) => {
 }
 
 function getByValue(array, id) {
-    var result  = array.filter(function(obj){return obj.id === id;} );
-    return result ? result[0] : null; // or undefined
+    for (const obj of array) {
+        if (obj.id === id)
+            return obj;
+    }
+    return null;
 }
 
 router.shuffle = function() {
