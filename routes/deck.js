@@ -13,7 +13,7 @@ const deckSize = card.length;
 router.findAll = (req, res) => {
     // Return a JSON representation of our list
     res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(card,null,5));
+    res.send(JSON.stringify(card, null, 5));
 };
 
 /**
@@ -26,10 +26,10 @@ router.findOne = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
 
-    var deck = getByValue(card,req.params.id);
+    var deck = getByValue(card, req.params.id);
 
     if (deck != null)
-        res.send(JSON.stringify(deck,null,5));
+        res.send(JSON.stringify(deck, null, 5));
     else
         res.send('deckCard NOT Found!!');
 
@@ -50,15 +50,13 @@ function getByValue(array, id) {
     return null;
 }
 
-router.shuffle = function() {
-    /*
-     * The Fisher-Yates shuffle algorithm is as follows:
-     * (reference: https://en.wikipedia.org/wiki/Fisher–Yates_shuffle#The_modern_algorithm)
-     * To shuffle an array a of n elements of indices 0 to n-1:
-     *      for i from n−1 down to 1 do
-     *          j ← random integer such that 0 ≤ j ≤ i
-     *          exchange a[j] and a[i]
-     */
+/**
+ * this was basically copied from this repo
+ * https://github.com/ashok-s-nair/card-shuffle-deal/blob/master/app/carddeck.js
+ * but for random on roulette i did it another way
+ */
+router.shuffle = function () {
+
     let rIndex = 0;
     let holdingRef = null;
 

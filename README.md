@@ -11,6 +11,9 @@ Web-app-development assignment 1
 - [things-to-remember](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#things-to-remember)
 - [set-up](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#set-up)
 - [requests](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#requests)
+- [update-29/10/2018](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#update-29/10/2018)
+- [heroku](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#heroku)
+- [name-studentnumber](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#name-studentnumber)
 
 models
 ---------
@@ -32,7 +35,7 @@ routes
 - [x] **Game Lobbies** - Shows all game lobbies and lets the user create a new one if none available.
 - [x] **Player** - Used for showing all players and will be used for a leader-board in the future.
 - [x] **Randomize** - Just a function used but the deck route.
-- [ ] **Roulette** - This will be the roulette.
+- [x] **Roulette** - This will be the roulette.
 
 
 things-to-remember
@@ -46,6 +49,13 @@ Then I need to make a playable object and the return content must be the player 
 I still don't know how to do the game logic code.
 these end points are going to be disgustingly long.
 Where is the .gitignore gone?
+
+update-29/10/2018
+---------
+Unfortunately it is very hard to make game so no game.
+roulette was made part in the project near the end.
+persisted with mlab via mongoose
+pushed to heroku too
 
 requests
 ---------
@@ -61,5 +71,16 @@ requests
 |/players/count|
 |/roulette|
 |/roulette/random|
+
+heroku
+---------
+https://webapp20075681.herokuapp.com
+
+name-studentnumber
+---------
+|name|studentnumber|
+| --- | --- |
+| Kevin Power | 20075681 |
+
 
 
