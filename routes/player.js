@@ -14,41 +14,77 @@ let db = mongoose.connection;
 db.on('error', function(err) {console.log('Unable to Connect To [ ' + db.name+']', err);});
 db.once('open', function(){console.log('Successfully Connected to [' +db.name+']' );});
 
+/**
+ *
+ * @param req
+ * @param res
+ */
 router.findAll = (req, res) => {
     // Return a JSON representation of our list
     res.setHeader('Content-Type', 'application/json');
 
-    player.find(function (err, players) {
+    player.find(
+        /**
+         *
+         * @param err
+         * @param players
+         */
+        function (err, players) {
         if (err)
             res.send(err);
 
         res.send(JSON.stringify(players, null, 5));
     });
-}
+};
+
+/**
+ *
+ * @param req
+ * @param res
+ */
 
 router.getPlayersCount = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
-    player.find().count(function (err, players) {
+    player.find().count(
+        /**
+         *
+         * @param err
+         * @param players
+         */
+        function (err, players) {
         if (err)
             res.send(err);
 
         res.send(JSON.stringify(players, null, 5));
     });
 
-}
+};
 
     router.findOne = (req, res) => {
 
         res.setHeader('Content-Type', 'application/json');
 
-        player.find({"_id": req.params.id}, function (err, players) {
+        player.find({"_id": req.params.id},
+            /**
+             *
+             * @param err
+             * @param players
+             */
+            function (err, players) {
             if (err)
                 res.json({message: 'Player NOT Found!', errmsg: err});
             else
                 res.send(JSON.stringify(players, null, 5));
         });
-    }
+    };
+
+/**
+ *
+ * @param array
+ * @param id
+ * @returns {null}
+ */
 
 function getByValue(array, id) {
     var result = array.filter(function (obj) {
@@ -56,6 +92,12 @@ function getByValue(array, id) {
     });
     return result ? result[0] : null; // or undefined
 }
+
+/**
+ *
+ * @param array
+ * @returns {number}
+ */
 
 function getTotalLives(array) {
     let totalLives = 0;
@@ -65,15 +107,32 @@ function getTotalLives(array) {
     return totalLives;
 }
 
+/**
+ *
+ * @param req
+ * @param res
+ */
 router.findTotalLives = (req, res) => {
 
-    player.find(function (err, players) {
+    player.find(
+        /**
+         *
+         * @param err
+         * @param players
+         */
+        function (err, players) {
         if (err)
             res.send(err);
         else
             res.json({totalLives: getTotalLives(players)});
     });
-}
+};
+
+/**
+ *
+ * @param req
+ * @param res
+ */
 
 router.addPlayer = (req, res) => {
 
@@ -91,7 +150,14 @@ router.addPlayer = (req, res) => {
         else
             res.json({message: 'Player Successfully Added!', data: Player});
     });
-}
+};
+
+/**
+ *
+ * @param array
+ * @param damage
+ * @returns {null}
+ */
 
 function getCardByValue(array, damage) {
     for (const obj of array) {
@@ -102,15 +168,11 @@ function getCardByValue(array, damage) {
     return null;
 }
 
-/*//ADD THIS FUNCTION
-function damagetaken(card) {
-    var damage = getCardByValue(card, req.params.damage);
-
-
-
-    card.forEach(function(obj) { livesLeft -= obj.Lives; });
-    return livesLeft;
-}*/
+/**
+ *
+ * @param req
+ * @param res
+ */
 
 router.decrementLives = (req, res) => {
     var player = getByValue(player, req.params.id);
@@ -124,7 +186,13 @@ router.decrementLives = (req, res) => {
     else
         res.send('Player NOT Found - Damage NOT Successful!!');
 
-}
+};
+
+/**
+ *
+ * @param req
+ * @param res
+ */
 
 router.deletePlayer = (req, res) => {
 
@@ -134,7 +202,7 @@ router.deletePlayer = (req, res) => {
         else
             res.json({message: 'Player Successfully Deleted!'});
     });
-}
+};
 
 
 module.exports = router;

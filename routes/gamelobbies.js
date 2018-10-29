@@ -13,30 +13,60 @@ let db = mongoose.connection;
 db.on('error', function(err) {console.log('Unable to Connect To [ ' + db.name+']', err);});
 db.once('open', function(){console.log('Successfully Connected to [' +db.name+']' );});
 
+/**
+ *
+ * @param req
+ * @param res
+ */
+
 router.findAll = (req, res) => {
     // Return a JSON representation of our list
     res.setHeader('Content-Type', 'application/json');
 
-    lobbies.find(function (err, lobbies) {
+    lobbies.find(
+        /**
+         *
+         * @param err
+         * @param lobbies
+         */
+        function (err, lobbies) {
         if (err)
             res.send(err);
 
         res.send(JSON.stringify(lobbies, null, 5));
     });
-}
+};
 
+/**
+ *
+ * @param req
+ * @param res
+ */
 
 router.findOne = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
 
-    lobbies.find({"_id": req.params.id}, function (err, lobby) {
+    lobbies.find({"_id": req.params.id},
+        /**
+         *
+         * @param err
+         * @param lobby
+         */
+        function (err, lobby) {
         if (err)
             res.json({message: 'Lobby NOT Found!', errmsg: err});
         else
             res.send(JSON.stringify(lobby, null, 5));
     });
-}
+};
+
+/**
+ *
+ * @param array
+ * @param id
+ * @returns {null}
+ */
 
 function getByValue(array, id) {
     for (const obj of array) {
@@ -46,6 +76,12 @@ function getByValue(array, id) {
     return null;
 }
 
+/**
+ *
+ * @param array
+ * @returns {number} votes
+ */
+
     function getTotalVotes(array) {
         let totalVotes = 0;
         array.forEach(function (obj) {
@@ -54,15 +90,33 @@ function getByValue(array, id) {
         return totalVotes;
     }
 
-    router.findTotalVotes = (req, res) => {
+/**
+ *
+ * @param req
+ * @param res
+ */
 
-        lobbies.find(function (err, lobbies) {
+router.findTotalVotes = (req, res) => {
+
+        lobbies.find(
+            /**
+             *
+             * @param err
+             * @param lobbies
+             */
+            function (err, lobbies) {
             if (err)
                 res.send(err);
             else
                 res.json({totalvotes: getTotalVotes(lobbies)});
         });
-    }
+    };
+
+/**
+ *
+ * @param req
+ * @param res
+ */
 
     router.addLobby = (req, res) => {
 
@@ -79,9 +133,15 @@ function getByValue(array, id) {
             else
                 res.json({message: 'Lobby Successfully Added!', data: lobby});
         });
-    }
+    };
 
-    router.incrementUpvotes = (req, res) => {
+/**
+ *
+ * @param req
+ * @param res
+ */
+
+router.incrementUpvotes = (req, res) => {
         var lobby = getByValue(lobbies, req.params.id);
 
         if (lobby != null) {
@@ -91,7 +151,13 @@ function getByValue(array, id) {
         else
             res.send('Lobby NOT Found - UpVote NOT Successful!!');
 
-    }
+    };
+
+/**
+ *
+ * @param req
+ * @param res
+ */
 
     router.deleteLobby = (req, res) => {
 
@@ -101,7 +167,7 @@ function getByValue(array, id) {
             else
                 res.json({message: 'Lobby Successfully Deleted!'});
         });
-    }
+    };
 
 
     module.exports = router;

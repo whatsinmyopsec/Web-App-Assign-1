@@ -1,6 +1,10 @@
 const seeder = require('mongoose-seed');
 var logger = require('winston');
 
+/**
+ *
+ * @param cb
+ */
 
 const seed = function (cb) {
     seeder.connect('mongodb://localhost:27017/lobbiesdb', function () {

@@ -61,12 +61,29 @@ app.delete('/lobbies/:id', lobbies.deleteLobby);
 app.delete('/players/:id', players.deletePlayer);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+
+app.use(
+    /**
+     *
+     * @param req
+     * @param res
+     * @param next
+     */
+    function (req, res, next) {
     next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+
+app.use(
+    /**
+     *
+     * @param err
+     * @param req
+     * @param res
+     * @param next
+     */
+    function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};

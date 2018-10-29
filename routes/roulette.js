@@ -13,18 +13,36 @@ let db = mongoose.connection;
 db.on('error', function(err) {console.log('Unable to Connect To [ ' + db.name+']', err);});
 db.once('open', function(){console.log('Successfully Connected to [' +db.name+']' );});
 
+
+/**
+ *
+ * @param req
+ * @param res
+ */
 router.testfunction = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
 
-    rouletteOptions.find(function (err, cards) {
+    rouletteOptions.find(
+        /**
+         *
+         * @param err
+         * @param cards
+         */
+        function (err, cards) {
         if (err)
             res.send(err);
 
         res.send(JSON.stringify(cards,null,5))
 
     })
-}
+};
+
+/**
+ *
+ * @param req
+ * @param res
+ */
 
 router.additems = (req, res) => {
 
@@ -44,7 +62,7 @@ router.additems = (req, res) => {
         else
             res.json({message: 'Card Successfully Added!', data: card});
     });
-}
+};
 
 //NEEDS TO BE SOME KIND OF TIMEOUT ON THIS
 //AD FOR USE ..ETC

@@ -10,7 +10,7 @@ router.startgame(function () {
 
 
 
-})
+});
 
 
 module.exports = router;

@@ -4,11 +4,23 @@ let express = require('express');
 let router = express.Router();
 const deckSize = card.length;
 
+/**
+ *
+ * @param req
+ * @param res
+ */
+
 router.findAll = (req, res) => {
     // Return a JSON representation of our list
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(card,null,5));
-}
+};
+
+/**
+ *
+ * @param req
+ * @param res
+ */
 
 router.findOne = (req, res) => {
 
@@ -21,7 +33,14 @@ router.findOne = (req, res) => {
     else
         res.send('deckCard NOT Found!!');
 
-}
+};
+
+/**
+ *
+ * @param array
+ * @param id
+ * @returns {null}
+ */
 
 function getByValue(array, id) {
     for (const obj of array) {
@@ -49,7 +68,7 @@ router.shuffle = function() {
         this.card[sRef - 1] = this.card[rIndex];
         this.card[rIndex] = holdingRef;
     }
-}
+};
 
 
 module.exports = router;
