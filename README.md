@@ -13,11 +13,11 @@ Web-app-development assignment 1
 
 models
 ---------
-- [ ] **Cards** - Basic array for cards not sure to put this into the mongo database or not.
-- [ ] **Lobbies** - Simple schema for lobby layout.
-- [ ] **Player** - Basic mongoose schema to get base information on the player/user. with an array of starting cards. 
+- [x] **Cards** - Basic array for cards not sure to put this into the mongo database or not.
+- [x] **Lobbies** - Simple schema for lobby layout.
+- [x] **Player** - Basic mongoose schema to get base information on the player/user. with an array of starting cards. 
                    Also not sure if this will be how I want it too.
-- [ ] **Roulette Options** - Again a schema for the data, this time for cards to only be unlocked via roulette.
+- [x] **Roulette Options** - Again a schema for the data, this time for cards to only be unlocked via roulette.
 
 
 
@@ -26,11 +26,11 @@ models
 routes
 ---------
 - [ ] **Bot** - Eventually a bot player for practice.
-- [ ] **Deck** - Gets the cards and shuffles.
+- [x] **Deck** - Gets the cards and shuffles.
 - [ ] **Game** - Soon to be the core code for the game.
-- [ ] **Game Lobbies** - Shows all game lobbies and lets the user create a new one if none available.
-- [ ] **Player** - Used for showing all players and will be used for a leader-board in the future.
-- [ ] **Randomize** - Just a function used but the deck route.
+- [x] **Game Lobbies** - Shows all game lobbies and lets the user create a new one if none available.
+- [x] **Player** - Used for showing all players and will be used for a leader-board in the future.
+- [x] **Randomize** - Just a function used but the deck route.
 - [ ] **Roulette** - This will be the roulette.
 
 
@@ -44,7 +44,7 @@ what their options are. `how would I do this without the person disconnecting fo
 Then I need to make a playable object and the return content must be the player object. 
 I still don't know how to do the game logic code.
 these end points are going to be disgustingly long.
-
+Where is the .gitignore gone?
 
 
 

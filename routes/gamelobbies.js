@@ -1,7 +1,7 @@
 let lobbies = require('../models/lobbies');
 let express = require('express');
 let router = express.Router();
-
+require('dotenv').config();
 let mongoose = require('mongoose');
 
 var mongodbUri ='mongodb://lobbiesdb:12345k@ds125683.mlab.com:25683/webgame';
