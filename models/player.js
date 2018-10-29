@@ -8,11 +8,11 @@ let PlayerSchema = new mongoose.Schema({
     //should there be a foreign key for this?
         cards:[
             {
-                id: Number,
+                id: String,
                 name: String,
                 type: String,
                 ability: String,
-                damage: Number
+                damage: String
             }
         ],
     },

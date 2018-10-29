@@ -3,8 +3,16 @@ let express = require('express');
 let deck = require('./deck');
 let card = require('../models/cards');
 let router = express.Router();
+let mongoose = require('mongoose');
 
-//players fix needed
+var mongodbUri ='mongodb://playerdb:214325f@ds125683.mlab.com:25683/webgame';
+
+mongoose.connect(mongodbUri);
+
+let db = mongoose.connection;
+
+db.on('error', function(err) {console.log('Unable to Connect To [ ' + db.name+']', err);});
+db.once('open', function(){console.log('Successfully Connected to [' +db.name+']' );});
 
 router.findAll = (req, res) => {
     // Return a JSON representation of our list

@@ -11,6 +11,7 @@ const usersRouter = require('./routes/users');
 const lobbies = require('./routes/gamelobbies');
 const deck = require('./routes/deck');
 const players = require('./routes/player');
+const roulette = require('./routes/roulette');
 
 const app = express();
 
@@ -40,8 +41,12 @@ app.get('/player', players.findAll);
 app.get('/player/:id', players.findOne);
 app.get('/players/count', players.getPlayersCount);
 
+app.get('/roulette', roulette.testfunction);
+
 
 app.post('/lobbies', lobbies.addLobby);
+
+app.post('/roulette', roulette.additems);
 
 app.post('/players', players.addPlayer);
 
