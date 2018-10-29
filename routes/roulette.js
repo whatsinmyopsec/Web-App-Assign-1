@@ -93,7 +93,7 @@ router.roulette = (req, res) => {
             // Get a random entry
             var random = Math.floor(Math.random() * count);
 
-            // Again query all users but only fetch one offset by our random #
+            // Again query all cards but only fetch one offset by our random #
             rouletteOptions.findOne().skip(random).exec(
                 /**
                  *
