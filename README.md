@@ -9,7 +9,6 @@ Web-app-development assignment 1
 - [models](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#models)
 - [routes](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#routes)
 - [things-to-remember](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#things-to-remember)
-- [set-up](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#set-up)
 - [update-29/10/2018](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#update-29/10/2018)
 - [requests](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#requests)
 - [heroku](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#heroku)
@@ -24,10 +23,6 @@ models
                    Also not sure if this will be how I want it too.
 - [x] **Roulette Options** - Again a schema for the data, this time for cards to only be unlocked via roulette.
 
-
-
-
-
 routes
 ---------
 - [ ] **Bot** - Eventually a bot player for practice.
@@ -37,7 +32,6 @@ routes
 - [x] **Player** - Used for showing all players and will be used for a leader-board in the future.
 - [x] **Randomize** - Just a function used but the deck route.
 - [x] **Roulette** - This will be the roulette.
-
 
 things-to-remember
 --------
