@@ -48,7 +48,3 @@ Where is the .gitignore gone?
 
 
 
-set-up
---------
-
-

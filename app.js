@@ -42,6 +42,7 @@ app.get('/player/:id', players.findOne);
 app.get('/players/count', players.getPlayersCount);
 
 app.get('/roulette', roulette.testfunction);
+app.get('/roulette/random', roulette.roulette);
 
 
 app.post('/lobbies', lobbies.addLobby);

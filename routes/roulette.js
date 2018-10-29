@@ -1,17 +1,21 @@
 let express = require('express');
 let rouletteOptions = require('../models/rouletteOptions');
 let router = express.Router();
-let rand = require('./randomize');
 let mongoose = require('mongoose');
 
-var mongodbUri ='mongodb://roulettedb:gsai231@ds125683.mlab.com:25683/webgame';
+
+var mongodbUri = 'mongodb://roulettedb:gsai231@ds125683.mlab.com:25683/webgame';
 
 mongoose.connect(mongodbUri);
 
 let db = mongoose.connection;
 
-db.on('error', function(err) {console.log('Unable to Connect To [ ' + db.name+']', err);});
-db.once('open', function(){console.log('Successfully Connected to [' +db.name+']' );});
+db.on('error', function (err) {
+    console.log('Unable to Connect To [ ' + db.name + ']', err);
+});
+db.once('open', function () {
+    console.log('Successfully Connected to [' + db.name + ']');
+});
 
 
 /**
@@ -30,18 +34,20 @@ router.testfunction = (req, res) => {
          * @param cards
          */
         function (err, cards) {
-        if (err)
-            res.send(err);
+            if (err)
+                res.send(err);
 
-        res.send(JSON.stringify(cards,null,5))
+            res.send(JSON.stringify(cards, null, 5))
 
-    })
+        })
 };
 
 /**
  *
  * @param req
  * @param res
+ * This was to add the data
+ * Mode data can be added
  */
 
 router.additems = (req, res) => {
@@ -64,24 +70,42 @@ router.additems = (req, res) => {
     });
 };
 
-//NEEDS TO BE SOME KIND OF TIMEOUT ON THIS
-//AD FOR USE ..ETC
+/**
+ *
+ * @param req
+ * @param res
+ */
+
+router.roulette = (req, res) => {
 
 
-
-//NEEDS A FUNCTION TO BE PROVABLY FAIR
-
+    res.setHeader('Content-Type', 'application/json');
 
 
-//NEEDS A FUNCTION TO MAKE RESULT RANDOM
-//MAYBE REUSE OF RANDOMIZE FUNCTION
+    rouletteOptions.count().exec(
+        /**
+         *
+         * @param err
+         * @param count used to get random entry
+         */
+        function (err, count) {
 
+            // Get a random entry
+            var random = Math.floor(Math.random() * count);
 
-
-
-
-
-
+            // Again query all users but only fetch one offset by our random #
+            rouletteOptions.findOne().skip(random).exec(
+                /**
+                 *
+                 * @param err
+                 * @param result the cad to return
+                 */
+                function (err, result) {
+                    // Tada! random card for roulette
+                    res.send(JSON.stringify(result, null, 5));
+                })
+        })
+};
 
 
 module.exports = router;
