@@ -10,7 +10,7 @@ Web-app-development assignment 1
 - [routes](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#routes)
 - [things-to-remember](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#things-to-remember)
 - [set-up](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#set-up)
-
+- [requests](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#requests)
 models
 ---------
 - [x] **Cards** - Basic array for cards not sure to put this into the mongo database or not.
@@ -46,5 +46,19 @@ I still don't know how to do the game logic code.
 these end points are going to be disgustingly long.
 Where is the .gitignore gone?
 
+requests
+---------
+| gets | posts | puts | deletes |
+| --- | --- | --- | --- |
+|/lobbies|/lobbies|/lobbies/:id/vote|/lobbies/:id|
+|/lobbies/votes|/roulette|/players/:id/lives|/players/:id|
+|/lobbies/:id|/players|
+|/cards|
+|/cards/:id|
+|/player|
+|/player/:id|
+|/players/count|
+|/roulette|
+|/roulette/random|
 
 
