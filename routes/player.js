@@ -18,7 +18,7 @@ router.findAll = (req, res) => {
     });
 }
 
-router.getPLayersCount = (req, res) => {
+router.getPlayersCount = (req, res) => {
     res.setHeader('Content-Type', 'application/json');
 
     player.find().count(function (err, players) {

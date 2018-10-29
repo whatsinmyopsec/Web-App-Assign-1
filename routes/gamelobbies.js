@@ -4,17 +4,14 @@ let router = express.Router();
 
 let mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/lobbiesdb');
+var mongodbUri ='mongodb://lobbiesdb:12345k@ds125683.mlab.com:25683/webgame';
+
+mongoose.connect(mongodbUri);
 
 let db = mongoose.connection;
 
-db.on('error', function (err) {
-    console.log('Unable to Connect to [ ' + db.name + ' ]', err);
-});
-
-db.once('open', function () {
-    console.log('Successfully Connected to [ ' + db.name + ' ]');
-});
+db.on('error', function(err) {console.log('Unable to Connect To [ ' + db.name+']', err);});
+db.once('open', function(){console.log('Successfully Connected to [' +db.name+']' );});
 
 router.findAll = (req, res) => {
     // Return a JSON representation of our list

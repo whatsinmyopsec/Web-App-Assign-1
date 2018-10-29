@@ -38,7 +38,7 @@ app.get('/cards/:id', deck.findOne);
 app.get('/player', players.findAll);
 //app.get('/player/:lives', players.findTotalLives);
 app.get('/player/:id', players.findOne);
-app.get('/players/count', players.getPLayersCount);
+app.get('/players/count', players.getPlayersCount);
 
 
 app.post('/lobbies', lobbies.addLobby);
