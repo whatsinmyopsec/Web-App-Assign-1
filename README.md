@@ -56,7 +56,8 @@ update-29/10/2018
 Unfortunately it is very hard to make game so no game.
 roulette was made part in the project near the end.
 persisted with mlab via mongoose for players, lobbies, rouletteoptions.
-pushed to heroku too.
+pushed to heroku too. Also no chat client because I didn't see how that 
+would be possible without the frontend.
 
 requests
 ---------
