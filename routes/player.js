@@ -61,7 +61,13 @@ router.getPlayersCount = (req, res) => {
 
 };
 
-    router.findOne = (req, res) => {
+/**
+ *
+ * @param req
+ * @param res
+ */
+
+router.findOne = (req, res) => {
 
         res.setHeader('Content-Type', 'application/json');
 
@@ -77,22 +83,8 @@ router.getPlayersCount = (req, res) => {
             else
                 res.send(JSON.stringify(players, null, 5));
         });
-    };
+};
 
-/**
- *
- * @param array
- * @param id
- * @returns {null}
- */
-
-function getByValue(array, id) {
-    for (const obj of array) {
-        if (obj.id === id)
-            return obj;
-    }
-    return null;
-}
 
 /**
  *
@@ -176,9 +168,9 @@ function getCardByValue(array, damage) {
  */
 
 router.decrementLives = (req, res) => {
-    var player = getByValue(player, req.params.id);
+    player.findById(req.params.id);
     var card = getCardByValue(card, req.params.damage);
-    var damage = obj.parseInt(card);
+    let damage = obj.parseInt(card);
 
     if (player != null) {
         player.lives -= damage;
