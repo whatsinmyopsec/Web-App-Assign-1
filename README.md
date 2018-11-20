@@ -12,7 +12,6 @@ Web-app-development assignment 1
 - [update-29/10/2018](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#update-29/10/2018)
 - [requests](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#requests)
 - [heroku](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#heroku)
-- [name-studentnumber](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#name-studentnumber)
 - [references](https://github.com/Whats-In-My-Vape/Web-App-Assign-1#references)
 
 models
@@ -71,12 +70,6 @@ requests
 heroku
 ---------
 https://webapp20075681.herokuapp.com
-
-name-studentnumber
----------
-|name|studentnumber|
-| --- | --- |
-| Kevin Power | 20075681 |
 
 references
 ---------
