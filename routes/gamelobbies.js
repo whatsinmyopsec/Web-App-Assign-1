@@ -37,7 +37,7 @@ router.findAll = (req, res) => {
             if (err)
                 res.send(err);
 
-            res.send(JSON.stringify(lobbies, null, 5));
+            res.json(lobbies, null, 5);
         });
 };
 
@@ -61,7 +61,7 @@ router.findOne = (req, res) => {
             if (err)
                 res.json({message: 'Lobby NOT Found!', errmsg: err});
             else
-                res.send(JSON.stringify(lobby, null, 5));
+                res.json(lobby, null, 5);
         });
 };
 

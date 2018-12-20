@@ -37,7 +37,7 @@ router.testfunction = (req, res) => {
             if (err)
                 res.send(err);
 
-            res.send(JSON.stringify(cards, null, 5))
+            res.json(cards, null, 5)
 
         })
 };

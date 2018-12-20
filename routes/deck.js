@@ -13,7 +13,7 @@ const deckSize = card.length;
 router.findAll = (req, res) => {
     // Return a JSON representation of our list
     res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(card, null, 5));
+    res.json(card, null, 5);
 };
 
 /**
@@ -29,7 +29,7 @@ router.findOne = (req, res) => {
     var deck = getByValue(card, req.params.id);
 
     if (deck != null)
-        res.send(JSON.stringify(deck, null, 5));
+        res.json(deck, null, 5);
     else
         res.send('deckCard NOT Found!!');
 

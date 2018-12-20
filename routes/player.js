@@ -33,7 +33,7 @@ router.findAll = (req, res) => {
         if (err)
             res.send(err);
 
-        res.send(JSON.stringify(players, null, 5));
+        res.json(players, null, 5);
     });
 };
 
@@ -56,7 +56,7 @@ router.getPlayersCount = (req, res) => {
         if (err)
             res.send(err);
 
-        res.send(JSON.stringify(players, null, 5));
+        res.json(players, null, 5);
     });
 
 };
@@ -81,7 +81,7 @@ router.findOne = (req, res) => {
             if (err)
                 res.json({message: 'Player NOT Found!', errmsg: err});
             else
-                res.send(JSON.stringify(players, null, 5));
+                res.json(players, null, 5);
         });
 };
 
